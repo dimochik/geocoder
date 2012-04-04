@@ -25,10 +25,19 @@ module Geocoder::Lookup
       return []
     end
 
+    #QUERY_STRING = '/street-address/?' +
+    # 	'street=' + STREET +
+    #	'&city=' + CITY +
+    #	'&state=' + STATE +
+    #	'&zipcode=' + ZIP_CODE +
+    #	'&candidates=' + NUMBER_OF_CANDIDATES +
+    #	'&auth-token=' + AUTH_TOKEN
+
+
     def query_url(query, reverse = false)
       params = {
         'auth-token' => Geocoder::Configuration.api_key
-      }
+      }.merge(query)
       "#{protocol}://api.qualifiedaddress.com/street-address/?" + hash_to_query(params)
     end
   end
